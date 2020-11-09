@@ -18,7 +18,7 @@ public class MainController {
     public String homepage(){
         return "Hello in hompage";
     }
-    @GetMapping("/user?id={userId}&name={name}&lastName={lastName}&email={emial}&password={password}")
+    @GetMapping("/user/id={userId}&name={name}&lastName={lastName}&email={email}&password={password}")
     public User getUser(
             @PathVariable("userId") int userId, @PathVariable("name") String name,
             @PathVariable("lastName") String lastName, @PathVariable("email") String email,
