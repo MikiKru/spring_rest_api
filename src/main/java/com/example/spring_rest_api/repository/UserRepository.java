@@ -12,5 +12,5 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     // -> U UPDATE
     // -> D DELETE
     // here we can implement abstract method understanding for mysql db
-
+    User findFirstByEmail(String email);    // -> SELECT * FROM user WHERE email = ?;
 }

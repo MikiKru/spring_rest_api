@@ -19,5 +19,8 @@ public class UserService {
     public User addUser(User user){
         return userRepository.save(user);
     }
-
+    // SELECT * FROM user WHERE email = ?;
+    public User getUserByEmail(String email){
+        return userRepository.findFirstByEmail(email);
+    }
 }

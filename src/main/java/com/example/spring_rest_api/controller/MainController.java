@@ -35,7 +35,12 @@ public class MainController {
         User user = new User(name, lastName, email, password);  // definition and init of User class object
         return userService.addUser(user);
     }
-
+    @GetMapping("/users/findByEmail")
+    public User getUserByEmail(
+            @RequestParam("email") String email
+    ){
+        return userService.getUserByEmail(email);
+    }
 
     @GetMapping("/")        // http://www.localhost:8080/
     public String homepage(){
