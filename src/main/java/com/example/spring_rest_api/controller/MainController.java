@@ -1,11 +1,14 @@
 package com.example.spring_rest_api.controller;
 import com.example.spring_rest_api.model.User;
+import com.example.spring_rest_api.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 // CheetSheet
 // ALT + Enter -> auto-hints
@@ -14,6 +17,16 @@ import java.time.LocalDateTime;
 // ALT + Ins -> auto-generate
 @RestController   // controller class -> mapping http request for method java methods
 public class MainController {
+    private UserService userService;
+    // ALT + Enter - generate constructor
+    @Autowired
+    public MainController(UserService userService) {
+        this.userService = userService;
+    }
+    @GetMapping("/users")
+    public List<User> getAllUsers(){
+        return userService.getAllUsers();
+    }
     @GetMapping("/")        // http://www.localhost:8080/
     public String homepage(){
         return "Hello in hompage";
