@@ -15,4 +15,9 @@ public class UserService {
     public List<User> getAllUsers(){
         return userRepository.findAll();
     }
+    // INSERT INTO user VALUES (?,?,?,?,?);
+    public User addUser(User user){
+        return userRepository.save(user);
+    }
+
 }

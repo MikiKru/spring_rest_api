@@ -3,9 +3,7 @@ import com.example.spring_rest_api.model.User;
 import com.example.spring_rest_api.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -27,6 +25,18 @@ public class MainController {
     public List<User> getAllUsers(){
         return userService.getAllUsers();
     }
+    @PostMapping("/users/register")
+    public User registerUser(
+            @RequestParam("name") String name,
+            @RequestParam("lastName") String lastName,
+            @RequestParam("email") String email,
+            @RequestParam("password") String password
+    ){
+        User user = new User(name, lastName, email, password);  // definition and init of User class object
+        return userService.addUser(user);
+    }
+
+
     @GetMapping("/")        // http://www.localhost:8080/
     public String homepage(){
         return "Hello in hompage";
