@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service    // special class for implementation of business logic of api
 public class UserService {
@@ -31,5 +32,16 @@ public class UserService {
             result = true;
         }
         return result;
+    }
+    // UPDATE user SET password = ? WHERE userId = ?;
+    public User updatePassword(int userId, String newPassword){
+        User user = null;
+        Optional<User> userOptional = userRepository.findById(userId); // Optional<> -> can contains value or null
+        if(userOptional.isPresent()){                                  // if not null value is present returns true
+            User userToUpdate = userOptional.get();                    // get value from optional
+            userToUpdate.setPassword(newPassword);
+            user = userRepository.save(userToUpdate);                  // UPDATE when is executed on existing object in the repository
+        }
+        return user;
     }
 }
