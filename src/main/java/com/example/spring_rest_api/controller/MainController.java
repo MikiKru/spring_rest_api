@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
 
 // CheetSheet
@@ -24,6 +25,11 @@ public class MainController {
     @DeleteMapping("/users/delete/{userId}")
     public boolean deleteUserById(@PathVariable("userId") int userId){
         return userService.deleteUserById(userId);
+    }
+    @PutMapping("/users/changePassword")
+    public User updatePassword(
+            @RequestParam("userId") int userId, @RequestParam("newPassword") String newPassword){
+        return userService.updatePassword(userId, newPassword);
     }
 
     @GetMapping("/users")
@@ -58,7 +64,7 @@ public class MainController {
             @PathVariable("lastName") String lastName, @PathVariable("email") String email,
             @PathVariable("password") String password
     ){
-        return new User(userId, name, lastName, email,password, LocalDateTime.now(), false);
+        return new User(userId, name, lastName, email,password, LocalDateTime.now(), false, new HashSet<>());
     }
 
 }

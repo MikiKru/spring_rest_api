@@ -5,11 +5,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 // model class determine the data structure in our program
 @Entity     // map the user class on database entity - support ORM
@@ -27,6 +26,13 @@ public class User {
     private String password;
     private LocalDateTime registrationDateTime = LocalDateTime.now();   // auto-generation actual dfate and time value
     private boolean status = false;
+    @ManyToMany                     // N : M
+    @JoinTable(                     // association (relation) table
+            name = "users_to_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<Role> roles = new HashSet<>();
 
     public User(String name, String lastName, String email, String password) {
         this.name = name;
