@@ -21,6 +21,11 @@ public class MainController {
     public MainController(UserService userService) {
         this.userService = userService;
     }
+    @DeleteMapping("/users/delete/{userId}")
+    public boolean deleteUserById(@PathVariable("userId") int userId){
+        return userService.deleteUserById(userId);
+    }
+
     @GetMapping("/users")
     public List<User> getAllUsers(){
         return userService.getAllUsers();
