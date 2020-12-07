@@ -23,4 +23,13 @@ public class UserService {
     public User getUserByEmail(String email){
         return userRepository.findFirstByEmail(email);
     }
+    // DELETE FROM user WHERE userId = ?;
+    public boolean deleteUserById(int userId){
+        boolean result = false;
+        if(userRepository.existsById(userId)) {
+            userRepository.deleteById(userId);
+            result = true;
+        }
+        return result;
+    }
 }
