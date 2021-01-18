@@ -14,6 +14,7 @@ import java.util.List;
 // CTRL + SHIFT + F10 -> run application server
 // CTRL + D -> duplicate line
 // ALT + Ins -> auto-generate
+@RequestMapping("/api")         // prefix to all mappings
 @RestController   // controller class -> mapping http request for method java methods
 public class MainController {
     private UserService userService;
@@ -34,6 +35,7 @@ public class MainController {
 
     @GetMapping("/users")
     public List<User> getAllUsers(){
+
         return userService.getAllUsers();
     }
     @PostMapping("/users/register")
